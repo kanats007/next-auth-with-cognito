@@ -1,7 +1,7 @@
 import { getServerSession } from "next-auth/next";
-import { config } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
-export const NextAuthProvider = async (): Promise<boolean> => {
-  const session = await getServerSession(config);
-  return session ? true : false;
+export const NextAuthProvider = async () => {
+  const session = await getServerSession(authOptions);
+  return session ?? false;
 };
