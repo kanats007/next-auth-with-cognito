@@ -10,5 +10,11 @@ export default async function Layout({
   if (!session) {
     redirect("/login");
   }
-  return <>{children}</>;
+  return (
+    <>
+      <p>id: {session.user.id}</p>
+      <p>email: {session.user.email}</p>
+      {children}
+    </>
+  );
 }

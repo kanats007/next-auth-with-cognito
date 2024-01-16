@@ -13,6 +13,13 @@ export const authOptions: NextAuthOptions = {
     }),
     // ...add more providers here
   ],
+  callbacks: {
+    async session({ session, token, user }) {
+      // cognitoで管理しているユーザーID（多分）
+      session.user.id = token.sub;
+      return session;
+    },
+  },
 };
 const handler = NextAuth(authOptions);
 
