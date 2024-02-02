@@ -15,7 +15,7 @@ export const authOptions: NextAuthOptions = {
   ],
   callbacks: {
     async session({ session, token, user }) {
-      // cognitoで管理しているユーザーID（多分）
+      // cognitoで管理しているユーザーID
       session.user.id = token.sub;
       return session;
     },
