@@ -1,8 +1,11 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextApiRequest } from "next";
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
+import { NextAuthProvider } from "@/providers/NextAuth";
 
-export async function POST(req: NextApiRequest, res: NextResponse) {
-  const cookieStore = cookies();
-  return NextResponse.json({ error: "Hello from Next.js!" }, { status: 200 });
+export async function GET(req: NextApiRequest, res: NextResponse) {
+  const session = await NextAuthProvider();
+  if (!session)
+    return NextResponse.json({ message: "Unauthorized!" }, { status: 401 });
+  return NextResponse.json({ message: "Hello from Next.js!" }, { status: 200 });
 }

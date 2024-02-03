@@ -5,7 +5,7 @@ export const PostButton = () => {
     console.log("clicked");
     const post = async () => {
       const response = await fetch("api/tasks", {
-        method: "POST",
+        // method: "GE",
         // headers: {
         //   "Content-Type": "application/json",
         // },
@@ -17,7 +17,8 @@ export const PostButton = () => {
       return response;
     };
     const res = await post();
-    console.log(res);
+    const data = await res.json();
+    console.log(data);
   };
   return <button onClick={handleClick}>post</button>;
 };
