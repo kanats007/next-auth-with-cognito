@@ -1,13 +1,23 @@
 "use client";
-import { signIn } from "next-auth/react";
+import { getCsrfToken } from "next-auth/react";
+
+const signIn = async () => {
+  const res = await fetch("http://localhost:3000/api/auth/signin/cognito", {
+    method: "post",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    // @ts-expect-error
+    body: new URLSearchParams({
+      csrfToken: await getCsrfToken(),
+      json: true,
+    }),
+  });
+  const data = await res.json();
+  const url = data.url;
+  window.location.href = url;
+};
 
 export const LoginButton = () => {
-  return (
-    <button
-      onClick={() => signIn(undefined, { callbackUrl: "/" })}
-      className="mt-4 bg-blue-500 hover:bg-blue-300 active:scale-90 transition-all duration-200 text-white py-2 px-4 rounded-full mx-auto"
-    >
-      Sign in
-    </button>
-  );
+  return <button onClick={() => signIn()}>Sign in</button>;
 };
