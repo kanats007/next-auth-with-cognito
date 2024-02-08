@@ -19,9 +19,6 @@ export const authOptions: NextAuthOptions = {
   },
   callbacks: {
     async session({ session, token, user }) {
-      // console.log("session", session);
-      // console.log("token", token);
-      // console.log("user", user);
       // cognitoで管理しているユーザーID
       session.user.id = token.sub;
       return session;
@@ -29,13 +26,13 @@ export const authOptions: NextAuthOptions = {
   },
   logger: {
     error(code, metadata) {
-      console.error(code, metadata);
+      // console.error(code, metadata);
     },
     warn(code) {
-      console.warn(code);
+      // console.warn(code);
     },
     debug(code, metadata) {
-      console.debug(code, metadata);
+      // console.debug(code, metadata);
     },
   },
 };
