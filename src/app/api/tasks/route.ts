@@ -1,6 +1,5 @@
 import { NextApiRequest } from "next";
 import { NextResponse } from "next/server";
-import { cookies } from "next/headers";
 import { NextAuthProvider } from "@/providers/NextAuth";
 
 export async function GET(req: NextApiRequest, res: NextResponse) {
