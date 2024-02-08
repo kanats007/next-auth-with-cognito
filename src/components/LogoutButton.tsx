@@ -3,13 +3,15 @@ import { signOut } from "next-auth/react";
 
 export const LogoutButton = () => {
   const handleLogout = async () => {
-    signOut({
+    await signOut({
       // リロードを無効する https://next-auth.js.org/getting-started/client#using-the-redirect-false-option-1
       redirect: false,
     });
-    // ログアウトエンドポイント　　https://docs.aws.amazon.com/ja_jp/cognito/latest/developerguide/logout-endpoint.html
-    window.location.href =
-      "https://kanats-test.auth.ap-northeast-1.amazoncognito.com/logout?client_id=5oekukqv98q8ab32hd4h734v7d&logout_uri=http://localhost:3000/login";
+    // ログアウトエンドポイント
+    const res = await fetch("http://localhost:3000/api/auth/logout/cognito");
+    const data = await res.json();
+    const url = data.url;
+    window.location.replace(url);
   };
   return (
     <button
