@@ -13,6 +13,10 @@ export const authOptions: NextAuthOptions = {
     }),
     // ...add more providers here
   ],
+  jwt: {
+    // second × min × hour × day
+    maxAge: 60 * 60 * 1 * 1,
+  },
   callbacks: {
     async session({ session, token, user }) {
       // console.log("session", session);
